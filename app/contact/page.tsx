@@ -1,107 +1,55 @@
-'use client';
+import type { Metadata } from "next";
+import { EnquiryForm } from "../components/EnquiryForm";
+import { Hours } from "../components/Hours";
+import { Icon } from "../components/Icons";
+import { PageHero } from "../components/PageHero";
+import { fullAddress, mapsEmbed, mapsLink, site } from "../lib/site";
 
-import { useState } from 'react';
-import axios from 'axios';
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description: `Contact ${site.name}, ${fullAddress}. Phone ${site.phone}.`,
+  alternates: { canonical: "/contact" },
+};
 
-export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [status, setStatus] = useState({
-    submitted: false,
-    submitting: false,
-    error: false
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus(prevStatus => ({ ...prevStatus, submitting: true }));
-
-    try {
-      await axios.post('/api/contact', formData);
-      setStatus({ submitted: true, submitting: false, error: false });
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      setStatus({ submitted: false, submitting: false, error: true });
-    }
-  };
-
+export default function ContactPage() {
   return (
-    <div className="max-w-2xl mx-auto py-16 px-4">
-      <h1 className="text-3xl font-bold mb-8">Contact Us</h1>
-      
-      {status.submitted ? (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
-          Thank you for your message! We'll be in touch soon.
+    <>
+      <PageHero
+        eyebrow="Contact"
+        title="Get in touch"
+        intro="Questions about treatment, fees or appointments? Send us a message or give us a call."
+        crumbs={[{ href: "/contact", label: "Contact" }]}
+      />
+      <section className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1fr_1.3fr]">
+        <div className="space-y-8">
+          <div className="space-y-5 rounded-2xl bg-white p-7 ring-1 ring-forest-100">
+            <a href={site.phoneHref} className="flex gap-4">
+              <Icon name="phone" className="h-6 w-6 shrink-0 text-forest-600" />
+              <span><span className="block text-sm text-muted">Phone</span><span className="text-lg font-semibold">{site.phone}</span></span>
+            </a>
+            {site.email && (
+              <a href={`mailto:${site.email}`} className="flex gap-4">
+                <Icon name="mail" className="h-6 w-6 shrink-0 text-forest-600" />
+                <span><span className="block text-sm text-muted">Email</span><span className="font-semibold">{site.email}</span></span>
+              </a>
+            )}
+            <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="flex gap-4">
+              <Icon name="pin" className="h-6 w-6 shrink-0 text-forest-600" />
+              <span><span className="block text-sm text-muted">Address</span><span className="font-semibold">{fullAddress}</span></span>
+            </a>
+            <div className="flex gap-4">
+              <Icon name="clock" className="h-6 w-6 shrink-0 text-forest-600" />
+              <div><span className="block text-sm text-muted">Opening hours</span><Hours /></div>
+            </div>
+          </div>
+          <iframe title={`Map showing ${site.name}`} src={mapsEmbed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="h-72 w-full rounded-2xl border-0" />
         </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-              Message
-            </label>
-            <textarea
-              name="message"
-              id="message"
-              rows={4}
-              required
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-          </div>
-          
-          <button
-            type="submit"
-            disabled={status.submitting}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-          >
-            {status.submitting ? 'Sending...' : 'Send Message'}
-          </button>
-          
-          {status.error && (
-            <p className="text-red-600 text-center">
-              There was an error sending your message. Please try again.
-            </p>
-          )}
-        </form>
-      )}
-    </div>
+        <div>
+          <h2 className="text-2xl font-semibold text-forest-900">Send us a message</h2>
+          <p className="mt-2 mb-6 text-muted">For urgent dental pain, please call rather than email.</p>
+          <EnquiryForm kind="contact" />
+        </div>
+      </section>
+    </>
   );
 }
