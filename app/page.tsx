@@ -1,92 +1,148 @@
-import Link from 'next/link';
+import Link from "next/link";
+import { BookButton } from "./components/BookButton";
+import { CtaBand } from "./components/CtaBand";
+import { Hours } from "./components/Hours";
+import { AcornMark, Icon } from "./components/Icons";
+import { ServiceCard } from "./components/ServiceCard";
+import { services } from "./lib/services";
+import { fullAddress, mapsEmbed, mapsLink, site } from "./lib/site";
+
+const reasons = [
+  { icon: "heart" as const, title: "Nervous? You're in good hands", body: "We take things at your pace, explain every step and stop whenever you need a break." },
+  { icon: "card" as const, title: "Clear costs, no surprises", body: "You'll get a treatment plan and fee estimate before we start. Bring your health fund card." },
+  { icon: "clock" as const, title: "Short-notice appointments", body: "Toothache can't wait. Call us and we'll do our best to see you quickly." },
+  { icon: "shield" as const, title: "Prevention first", body: "Regular check-ups catch small problems early — usually the simplest and most affordable care." },
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Find Your Perfect <span className="text-blue-600">Dentist</span>
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-            The modern way to discover and book dental care. Connecting patients with top-rated dentists instantly.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="/contact" 
-              className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition duration-200 shadow-lg hover:shadow-xl"
-            >
-              Get Early Access
-            </Link>
-            <Link 
-              href="/about" 
-              className="border border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-50 transition duration-200"
-            >
-              Learn More
-            </Link>
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-forest-50 via-cream to-acorn-100/60">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:py-24">
+          <div>
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-sm font-medium text-forest-700 ring-1 ring-forest-100">
+              <Icon name="pin" className="h-4 w-4" /> William Street, Armadale WA
+            </p>
+            <h1 className="mt-5 text-4xl font-semibold leading-tight text-forest-900 sm:text-5xl lg:text-6xl">
+              Gentle dental care that helps your smile grow strong.
+            </h1>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+              From check-ups and fillings to root canal treatment, orthodontics, dentures and whitening — {site.name} looks after patients from Armadale and surrounding suburbs with calm, unhurried care.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <BookButton className="px-7 py-3.5 text-base" label="Book an appointment" />
+              <a href={site.phoneHref} className="inline-flex items-center gap-2 rounded-full border border-forest-600 bg-white px-7 py-3.5 font-semibold text-forest-700 hover:bg-forest-50">
+                <Icon name="phone" className="h-4 w-4" /> Call {site.phone}
+              </a>
+            </div>
+            <p className="mt-6 text-sm text-muted">
+              In pain right now? <Link href="/emergency" className="font-semibold text-acorn-700 underline underline-offset-2">See emergency dental care →</Link>
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">How It Works</h2>
-          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            Simple, transparent, and designed with your dental health in mind.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-b from-blue-50 to-white hover:shadow-lg transition duration-300">
-              <div className="bg-blue-100 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">🔍</span>
+          <div className="relative mx-auto w-full max-w-md" aria-hidden="true">
+            <div className="absolute -inset-6 rounded-[3rem] bg-forest-200/40 blur-2xl" />
+            <div className="relative rounded-[2.5rem] bg-forest-700 p-10 shadow-xl">
+              <AcornMark className="mx-auto h-40 w-40 drop-shadow-lg" />
+              <div className="mt-8 grid grid-cols-2 gap-3 text-sm">
+                {["Check-ups", "Fillings", "Root canal", "Orthodontics", "Dentures", "Whitening"].map((t) => (
+                  <span key={t} className="flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 text-forest-50">
+                    <Icon name="check" className="h-4 w-4 text-acorn-300" /> {t}
+                  </span>
+                ))}
               </div>
-              <h3 className="text-xl font-bold mb-4">Search & Compare</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Find dentists based on location, services, insurance, and verified patient reviews.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-b from-green-50 to-white hover:shadow-lg transition duration-300">
-              <div className="bg-green-100 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">📅</span>
-              </div>
-              <h3 className="text-xl font-bold mb-4">Book Instantly</h3>
-              <p className="text-gray-600 leading-relaxed">
-                See real-time availability and schedule appointments with just a few clicks.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-b from-purple-50 to-white hover:shadow-lg transition duration-300">
-              <div className="bg-purple-100 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">⭐</span>
-              </div>
-              <h3 className="text-xl font-bold mb-4">Quality Care</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Receive exceptional dental care from carefully vetted and certified professionals.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Your Dental Experience?</h2>
-          <p className="text-xl text-gray-300 mb-8">Join thousands of satisfied patients today.</p>
-          <Link 
-            href="/contact" 
-            className="bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition duration-200 inline-block"
-          >
-            Get Started Now
+      {/* Why Acorn */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {reasons.map((r) => (
+            <div key={r.title} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-forest-100">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-acorn-100 text-acorn-700">
+                <Icon name={r.icon} />
+              </span>
+              <h2 className="mt-4 font-sans text-lg font-semibold text-forest-900">{r.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{r.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wider text-acorn-600">Our treatments</p>
+              <h2 className="mt-2 text-3xl font-semibold text-forest-900 sm:text-4xl">Everything your smile needs, under one roof</h2>
+            </div>
+            <Link href="/services" className="inline-flex items-center gap-1.5 font-semibold text-forest-700 hover:text-forest-900">
+              All services <Icon name="arrow" className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {services.slice(0, 6).map((s) => <ServiceCard key={s.slug} service={s} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* New patients */}
+      <section className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-wider text-acorn-600">New patients</p>
+          <h2 className="mt-2 text-3xl font-semibold text-forest-900 sm:text-4xl">Your first visit, made easy</h2>
+          <p className="mt-4 text-lg leading-relaxed text-muted">
+            Haven&rsquo;t seen a dentist in a while? That&rsquo;s okay. We&rsquo;ll start with a relaxed conversation, a thorough check and a clear plan — no pressure, no judgement.
+          </p>
+          <Link href="/new-patients" className="mt-6 inline-flex items-center gap-1.5 font-semibold text-forest-700 hover:text-forest-900">
+            What to expect & health funds <Icon name="arrow" className="h-4 w-4" />
           </Link>
         </div>
+        <ol className="space-y-4">
+          {["Book online or call our team", "Tell us about your health and any worries", "Comprehensive exam and clean", "A clear plan with costs before any treatment"].map((step, i) => (
+            <li key={step} className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-forest-100">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest-700 font-serif text-lg font-semibold text-white">{i + 1}</span>
+              <span className="font-medium">{step}</span>
+            </li>
+          ))}
+        </ol>
       </section>
-    </div>
+
+      {/* Location */}
+      <section className="bg-forest-50 py-16">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_1.4fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-acorn-600">Find us</p>
+            <h2 className="mt-2 text-3xl font-semibold text-forest-900">In the heart of Armadale</h2>
+            <div className="mt-6 space-y-5">
+              <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="flex gap-3 hover:text-forest-700">
+                <Icon name="pin" className="h-5 w-5 shrink-0 text-forest-600" /> {fullAddress}
+              </a>
+              <a href={site.phoneHref} className="flex gap-3 font-semibold hover:text-forest-700">
+                <Icon name="phone" className="h-5 w-5 shrink-0 text-forest-600" /> {site.phone}
+              </a>
+              <div className="flex gap-3">
+                <Icon name="clock" className="h-5 w-5 shrink-0 text-forest-600" />
+                <Hours />
+              </div>
+            </div>
+            <p className="mt-6 text-sm text-muted">Welcoming patients from {site.serviceAreas.slice(1).join(", ")} and nearby.</p>
+          </div>
+          <iframe
+            title={`Map showing ${site.name}`}
+            src={mapsEmbed}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-80 w-full rounded-2xl border-0 shadow-sm lg:h-full lg:min-h-80"
+          />
+        </div>
+      </section>
+
+      <CtaBand />
+    </>
   );
 }
