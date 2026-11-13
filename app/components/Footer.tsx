@@ -58,6 +58,10 @@ export function Footer() {
             <Icon name="clock" className="h-5 w-5 shrink-0" />
             <Hours dark />
           </div>
+          <div className="flex gap-3">
+            <Icon name="card" className="h-5 w-5 shrink-0" />
+            <span>HICAPS · {site.payments.cards.join(" · ")}<br />{site.payments.plans}</span>
+          </div>
         </div>
       </div>
       <div className="border-t border-forest-800">

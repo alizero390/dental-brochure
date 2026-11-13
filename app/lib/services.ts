@@ -42,7 +42,7 @@ export const services: Service[] = [
     ],
     faqs: [
       { q: "How often should I have a check-up?", a: "Most people do well with a visit every 6–12 months. We'll recommend an interval based on your own risk of decay and gum disease." },
-      { q: "Can I claim on my health fund?", a: "Check-ups and cleans are usually covered under extras/ancillary cover. Bring your health fund card and ask our team about claiming on the day." },
+      { q: "Can I claim on my health fund?", a: "Check-ups and cleans are usually covered under extras/ancillary cover. We have HICAPS, so bring your health fund card and you can claim on the spot — you only pay the gap." },
     ],
   },
   {
@@ -159,6 +159,7 @@ export const services: Service[] = [
     faqs: [
       { q: "Am I too old for orthodontics?", a: "Teeth can be moved at any age as long as your teeth and gums are healthy. Many of our orthodontic patients are adults." },
       { q: "How long does treatment take?", a: "It varies with the complexity of the case — from several months to a couple of years. We'll give you an estimate at your assessment." },
+      { q: "Can I pay for orthodontics in instalments?", a: "Yes. Payment plans for orthodontic treatment are available through DentiCare, so you can spread the cost. Ask our team for details." },
     ],
   },
   {

@@ -19,9 +19,10 @@ const bring = [
 ];
 
 const faqs = [
-  { q: "Do you accept health funds?", a: "Yes, you're welcome to use your private health insurance. How much you get back depends on your fund and level of extras cover — check with your fund, and bring your card so our team can help with your claim." },
+  { q: "Do you accept health funds?", a: "Yes. We have HICAPS, so you can claim on the spot with your health fund card and only pay the gap. How much you get back depends on your fund and level of extras cover." },
   { q: "How much will my visit cost?", a: "Fees depend on the treatment you need. We'll give you a written estimate before starting any treatment beyond your initial examination, so there are no surprises." },
-  { q: "Do you offer payment plans?", a: "Ask our team about the payment options available for larger treatment plans." },
+  { q: "What payment methods do you accept?", a: "We accept Visa and Mastercard, and health fund claims via HICAPS." },
+  { q: "Do you offer payment plans?", a: "Payment plans for orthodontic treatment are available through DentiCare. Ask our team about options for other treatment." },
   { q: "Can I bring my child?", a: "Please call us to discuss appointments for children, including whether the Child Dental Benefits Schedule may apply." },
 ];
 

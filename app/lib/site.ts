@@ -1,10 +1,9 @@
 /**
  * Single source of truth for practice details.
  *
- * IMPORTANT: Everything marked `VERIFY` came from public directory listings
- * (Healthdirect, Birdeye, Top4) and must be confirmed with the practice
- * before going live. Values set to `null` are deliberately not shown on the
- * site until the practice supplies them — never guess clinical or contact info.
+ * Phone, email, address, hours and payment options are confirmed from the
+ * practice's own website. Values set to `null` are deliberately not shown on
+ * the site until the practice supplies them — never guess contact info.
  */
 
 export type OpeningHours = { days: string; hours: string }[];
@@ -19,23 +18,32 @@ export const site = {
   // Canonical production URL — used for sitemap, canonical tags and schema.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.acorndentalcentre.com.au",
 
-  // VERIFY: most listings use 9497 4777; one Healthdirect entry shows 9399 7007.
   phone: "08 9497 4777",
   phoneHref: "tel:+61894974777",
 
-  // Set once the practice confirms its public inbox. Hidden when null.
-  email: null as string | null,
+  email: "info@acorndentalcentre.com.au" as string | null,
 
   address: {
-    street: "10/47 William Street", // VERIFY unit number
+    street: "10/47 William Street",
     suburb: "Armadale",
     state: "WA",
     postcode: "6112",
     country: "AU",
   },
 
-  // Supply real hours from the practice. When null the site says "call us".
-  hours: null as OpeningHours | null,
+  // When null the site says "call us for hours".
+  hours: [
+    { days: "Mon – Tue", hours: "8:00am – 7:00pm" },
+    { days: "Wed – Fri", hours: "8:00am – 5:30pm" },
+    { days: "Saturday", hours: "8:00am – 1:00pm" },
+    { days: "Sunday", hours: "Closed" },
+  ] as OpeningHours | null,
+
+  payments: {
+    hicaps: true,
+    cards: ["Visa", "Mastercard"],
+    plans: "Payment plans for orthodontics through DentiCare",
+  },
 
   // Paste the practice's online booking link (HotDoc, Centaur, Dental4Web…).
   // When null, "Book" buttons go to the on-site booking request form.
