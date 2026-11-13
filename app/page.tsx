@@ -9,7 +9,7 @@ import { fullAddress, mapsEmbed, mapsLink, site } from "./lib/site";
 
 const reasons = [
   { icon: "heart" as const, title: "Nervous? You're in good hands", body: "We take things at your pace, explain every step and stop whenever you need a break." },
-  { icon: "card" as const, title: "Clear costs, no surprises", body: "You'll get a treatment plan and fee estimate before we start. Bring your health fund card." },
+  { icon: "card" as const, title: "Clear costs, no surprises", body: "You'll get a treatment plan and fee estimate before we start. HICAPS on-the-spot health fund claims." },
   { icon: "clock" as const, title: "Short-notice appointments", body: "Toothache can't wait. Call us and we'll do our best to see you quickly." },
   { icon: "shield" as const, title: "Prevention first", body: "Regular check-ups catch small problems early — usually the simplest and most affordable care." },
 ];

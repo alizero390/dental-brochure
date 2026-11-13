@@ -24,15 +24,10 @@ Pages: Home, Services (+ one page per treatment), New Patients, About, Emergenci
 
 ## Before launch — get these from the practice
 
-Details were taken from public directories (Healthdirect, Birdeye, Top4) because the live site could not be audited. **Confirm every item:**
+Confirmed from the practice's own website: phone (08 9497 4777), email, address (10/47 William St), opening hours, HICAPS, Visa/Mastercard and DentiCare orthodontic payment plans. Still to collect:
 
-- [ ] **Phone number** — listings show both 08 9497 4777 (used) and 08 9399 7007.
-- [ ] **Address** — unit number "10/47 William Street".
-- [ ] **Opening hours** → `site.hours` (site says "call us" until set).
-- [ ] **Email** → `site.email`.
 - [ ] **Online booking link** (HotDoc / Centaur / Dental4Web etc.) → `site.bookingUrl`. Until set, "Book" goes to the on-site request form.
 - [ ] **Treatment list** — implants, crowns/bridges and children's dentistry/CDBS are *not* listed until confirmed.
-- [ ] **Health funds / HICAPS / payment plans** — copy is deliberately generic.
 - [ ] **Team** names, AHPRA titles, bios and photos (About page has a marked slot).
 - [ ] **Real photos** of the practice and team.
 - [ ] **Dentist sign-off** on all clinical copy (AHPRA advertising guidelines — no testimonials, no guarantees).
