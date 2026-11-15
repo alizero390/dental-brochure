@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { nav, site } from "../lib/site";
-import { AcornMark, Icon } from "./Icons";
+import { BrandMark, Icon } from "./Icons";
 import { BookButton } from "./BookButton";
 
 export function Header() {
@@ -18,10 +18,10 @@ export function Header() {
       </a>
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5" aria-label={`${site.name} home`}>
-          <AcornMark />
+          <BrandMark />
           <span className="leading-tight">
-            <span className="block font-serif text-lg font-semibold text-forest-800">Acorn Dental</span>
-            <span className="block text-xs tracking-wide text-muted">CENTRE · ARMADALE</span>
+            <span className="block whitespace-nowrap font-serif text-base font-semibold text-forest-800 sm:text-lg">{site.wordmark[0]}</span>
+            <span className="block whitespace-nowrap text-[11px] tracking-wide text-muted sm:text-xs">{site.wordmark[1]}</span>
           </span>
         </Link>
 

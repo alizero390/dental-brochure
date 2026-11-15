@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { site } from "./lib/site";
+import { site, themeCss } from "./lib/site";
 import { services } from "./lib/services";
 
 export const metadata: Metadata = {
@@ -21,9 +21,10 @@ export const metadata: Metadata = {
     description: site.description,
   },
   formatDetection: { telephone: true },
+  icons: { icon: site.logo === "tooth" ? "/icons/tooth.svg" : "/icons/acorn.svg" },
 };
 
-export const viewport: Viewport = { themeColor: "#1d4f38" };
+export const viewport: Viewport = { themeColor: site.theme.primary["700"] };
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -51,6 +52,9 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-AU">
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: themeCss }} />
+      </head>
       <body className="flex min-h-screen flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Header />

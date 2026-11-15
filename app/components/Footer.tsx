@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { fullAddress, mapsLink, nav, site } from "../lib/site";
 import { services } from "../lib/services";
-import { AcornMark, Icon } from "./Icons";
+import { BrandMark, Icon } from "./Icons";
 import { Hours } from "./Hours";
 
 export function Footer() {
@@ -10,7 +10,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <AcornMark />
+            <BrandMark />
             <span className="font-serif text-lg font-semibold text-white">{site.name}</span>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-forest-200">{site.tagline}. Proudly caring for patients from Armadale and surrounding suburbs.</p>
@@ -60,7 +60,7 @@ export function Footer() {
           </div>
           <div className="flex gap-3">
             <Icon name="card" className="h-5 w-5 shrink-0" />
-            <span>HICAPS · {site.payments.cards.join(" · ")}<br />{site.payments.plans}</span>
+            <span>{site.payments.map((line) => <span key={line} className="block">{line}</span>)}</span>
           </div>
         </div>
       </div>

@@ -2,17 +2,11 @@ import Link from "next/link";
 import { BookButton } from "./components/BookButton";
 import { CtaBand } from "./components/CtaBand";
 import { Hours } from "./components/Hours";
-import { AcornMark, Icon } from "./components/Icons";
+import { BrandMark, Icon } from "./components/Icons";
 import { ServiceCard } from "./components/ServiceCard";
 import { services } from "./lib/services";
 import { fullAddress, mapsEmbed, mapsLink, site } from "./lib/site";
 
-const reasons = [
-  { icon: "heart" as const, title: "Nervous? You're in good hands", body: "We take things at your pace, explain every step and stop whenever you need a break." },
-  { icon: "card" as const, title: "Clear costs, no surprises", body: "You'll get a treatment plan and fee estimate before we start. HICAPS on-the-spot health fund claims." },
-  { icon: "clock" as const, title: "Short-notice appointments", body: "Toothache can't wait. Call us and we'll do our best to see you quickly." },
-  { icon: "shield" as const, title: "Prevention first", body: "Regular check-ups catch small problems early — usually the simplest and most affordable care." },
-];
 
 export default function Home() {
   return (
@@ -22,13 +16,13 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:py-24">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-sm font-medium text-forest-700 ring-1 ring-forest-100">
-              <Icon name="pin" className="h-4 w-4" /> William Street, Armadale WA
+              <Icon name="pin" className="h-4 w-4" /> {site.copy.heroBadge}
             </p>
             <h1 className="mt-5 text-4xl font-semibold leading-tight text-forest-900 sm:text-5xl lg:text-6xl">
-              Gentle dental care that helps your smile grow strong.
+              {site.copy.heroTitle}
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted">
-              From check-ups and fillings to root canal treatment, orthodontics, dentures and whitening — {site.name} looks after patients from Armadale and surrounding suburbs with calm, unhurried care.
+              {site.copy.heroIntro}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <BookButton className="px-7 py-3.5 text-base" label="Book an appointment" />
@@ -44,9 +38,9 @@ export default function Home() {
           <div className="relative mx-auto w-full max-w-md" aria-hidden="true">
             <div className="absolute -inset-6 rounded-[3rem] bg-forest-200/40 blur-2xl" />
             <div className="relative rounded-[2.5rem] bg-forest-700 p-10 shadow-xl">
-              <AcornMark className="mx-auto h-40 w-40 drop-shadow-lg" />
+              <BrandMark className="mx-auto h-40 w-40 drop-shadow-lg" />
               <div className="mt-8 grid grid-cols-2 gap-3 text-sm">
-                {["Check-ups", "Fillings", "Root canal", "Orthodontics", "Dentures", "Whitening"].map((t) => (
+                {site.copy.heroChips.map((t) => (
                   <span key={t} className="flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 text-forest-50">
                     <Icon name="check" className="h-4 w-4 text-acorn-300" /> {t}
                   </span>
@@ -57,10 +51,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Acorn */}
+      {/* Why choose us */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {reasons.map((r) => (
+          {site.copy.reasons.map((r) => (
             <div key={r.title} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-forest-100">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-acorn-100 text-acorn-700">
                 <Icon name={r.icon} />

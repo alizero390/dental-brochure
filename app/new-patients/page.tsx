@@ -18,20 +18,13 @@ const bring = [
   "Concession, DVA or other cards if relevant",
 ];
 
-const faqs = [
-  { q: "Do you accept health funds?", a: "Yes. We have HICAPS, so you can claim on the spot with your health fund card and only pay the gap. How much you get back depends on your fund and level of extras cover." },
-  { q: "How much will my visit cost?", a: "Fees depend on the treatment you need. We'll give you a written estimate before starting any treatment beyond your initial examination, so there are no surprises." },
-  { q: "What payment methods do you accept?", a: "We accept Visa and Mastercard, and health fund claims via HICAPS." },
-  { q: "Do you offer payment plans?", a: "Payment plans for orthodontic treatment are available through DentiCare. Ask our team about options for other treatment." },
-  { q: "Can I bring my child?", a: "Please call us to discuss appointments for children, including whether the Child Dental Benefits Schedule may apply." },
-];
 
 export default function NewPatientsPage() {
   return (
     <>
       <PageHero
         eyebrow="New patients"
-        title="Welcome to Acorn Dental"
+        title={site.copy.newPatientsTitle}
         intro="Whether you're new to the area or it's been a while since your last visit, we'll help you feel at home from the moment you walk in."
         crumbs={[{ href: "/new-patients", label: "New Patients" }]}
       />
@@ -72,7 +65,7 @@ export default function NewPatientsPage() {
           <div>
             <h2 className="text-3xl font-semibold text-forest-900">Feeling nervous? Tell us.</h2>
             <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted">
-              Dental anxiety is really common. Let us know when you book and we&rsquo;ll allow extra time, explain each step before we do it, and agree on a signal so you can pause whenever you need. You&rsquo;re always in control.
+              {site.copy.nervousBody}
             </p>
           </div>
         </div>
@@ -81,7 +74,7 @@ export default function NewPatientsPage() {
       <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <h2 className="text-3xl font-semibold text-forest-900">Fees, funds & payments</h2>
         <div className="mt-6 divide-y divide-forest-100 rounded-2xl bg-white ring-1 ring-forest-100">
-          {faqs.map((f) => (
+          {site.copy.feeFaqs.map((f) => (
             <details key={f.q} className="group p-5">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
                 {f.q}
