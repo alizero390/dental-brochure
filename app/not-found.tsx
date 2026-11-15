@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { AcornMark } from "./components/Icons";
+import { BrandMark } from "./components/Icons";
 
 export default function NotFound() {
   return (
     <section className="mx-auto flex max-w-xl flex-col items-center px-4 py-24 text-center">
-      <AcornMark className="h-20 w-20" />
+      <BrandMark className="h-20 w-20" />
       <h1 className="mt-6 text-4xl font-semibold text-forest-900">Page not found</h1>
       <p className="mt-3 text-muted">Sorry, we couldn&rsquo;t find that page. It may have moved.</p>
       <div className="mt-8 flex gap-3">

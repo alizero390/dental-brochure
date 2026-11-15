@@ -1,64 +1,19 @@
 /**
- * Single source of truth for practice details.
- *
- * Phone, email, address, hours and payment options are confirmed from the
- * practice's own website. Values set to `null` are deliberately not shown on
- * the site until the practice supplies them — never guess contact info.
+ * Selects which clinic this build renders. Set NEXT_PUBLIC_CLINIC to a key of
+ * `clinics` (e.g. "armadale") per deployment; defaults to "acorn".
+ * Add a new clinic by creating app/lib/clinics/<id>.ts and registering it here.
  */
+import { acorn } from "./clinics/acorn";
+import { armadale } from "./clinics/armadale";
+import type { Clinic } from "./clinics/types";
 
-export type OpeningHours = { days: string; hours: string }[];
+const clinics: Record<string, Clinic> = { acorn, armadale };
 
-export const site = {
-  name: "Acorn Dental Centre",
-  shortName: "Acorn Dental",
-  tagline: "Gentle, unhurried dental care in Armadale",
-  description:
-    "Acorn Dental Centre is a general and cosmetic dental practice in Armadale, WA. Check-ups, fillings, root canal treatment, orthodontics, dentures, whitening and wisdom teeth care — with a gentle approach for nervous patients.",
+const id = process.env.NEXT_PUBLIC_CLINIC ?? "acorn";
+if (!clinics[id]) throw new Error(`Unknown NEXT_PUBLIC_CLINIC "${id}". Expected one of: ${Object.keys(clinics).join(", ")}`);
 
-  // Canonical production URL — used for sitemap, canonical tags and schema.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.acorndentalcentre.com.au",
-
-  phone: "08 9497 4777",
-  phoneHref: "tel:+61894974777",
-
-  email: "info@acorndentalcentre.com.au" as string | null,
-
-  address: {
-    street: "10/47 William Street",
-    suburb: "Armadale",
-    state: "WA",
-    postcode: "6112",
-    country: "AU",
-  },
-
-  // When null the site says "call us for hours".
-  hours: [
-    { days: "Mon – Tue", hours: "8:00am – 7:00pm" },
-    { days: "Wed – Fri", hours: "8:00am – 5:30pm" },
-    { days: "Saturday", hours: "8:00am – 1:00pm" },
-    { days: "Sunday", hours: "Closed" },
-  ] as OpeningHours | null,
-
-  payments: {
-    hicaps: true,
-    cards: ["Visa", "Mastercard"],
-    plans: "Payment plans for orthodontics through DentiCare",
-  },
-
-  // Paste the practice's online booking link (HotDoc, Centaur, Dental4Web…).
-  // When null, "Book" buttons go to the on-site booking request form.
-  bookingUrl: null as string | null,
-
-  // Public review profile (e.g. Google Business Profile link). Hidden when null.
-  reviewsUrl: null as string | null,
-
-  social: {
-    facebook: null as string | null,
-    instagram: null as string | null,
-  },
-
-  serviceAreas: ["Armadale", "Kelmscott", "Byford", "Mount Nasura", "Brookdale", "Seville Grove", "Haynes", "Bedfordale"],
-} as const;
+export const site: Clinic = clinics[id];
+export type { OpeningHours } from "./clinics/types";
 
 export const fullAddress = `${site.address.street}, ${site.address.suburb} ${site.address.state} ${site.address.postcode}`;
 
@@ -68,6 +23,13 @@ export const mapsEmbed = `https://www.google.com/maps?q=${mapsQuery}&output=embe
 
 export const bookHref = site.bookingUrl ?? "/book";
 export const bookIsExternal = Boolean(site.bookingUrl);
+
+/** CSS that maps the clinic's palette onto the Tailwind colour tokens. */
+export const themeCss = `:root:root{${[
+  ...Object.entries(site.theme.primary).map(([k, v]) => `--color-forest-${k}:${v}`),
+  ...Object.entries(site.theme.accent).map(([k, v]) => `--color-acorn-${k}:${v}`),
+  `--color-cream:${site.theme.surface}`,
+].join(";")}}`;
 
 export const nav = [
   { href: "/services", label: "Services" },

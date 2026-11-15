@@ -1,8 +1,24 @@
-import type { IconName } from "../lib/services";
+import type { IconName } from "../lib/catalog";
+import { site } from "../lib/site";
 
 type Props = { className?: string };
 
-export function AcornMark({ className = "h-9 w-9" }: Props) {
+/** The active clinic's logo mark. */
+export function BrandMark({ className = "h-9 w-9" }: Props) {
+  return site.logo === "tooth" ? <ToothMark className={className} /> : <AcornMark className={className} />;
+}
+
+export function ToothMark({ className = "h-9 w-9" }: Props) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
+      <rect x="2" y="2" width="44" height="44" rx="12" fill="var(--color-forest-700)" />
+      <path d="M17 10c-4.2 0-7 3.3-7 7.8 0 5 2.4 7.6 3.4 11.8 1.2 5 2 10.4 5 10.4 2.6 0 3-5.8 4.1-9.2.4-1.4 1-2.2 1.5-2.2s1.1.8 1.5 2.2c1.1 3.4 1.5 9.2 4.1 9.2 3 0 3.8-5.4 5-10.4 1-4.2 3.4-6.8 3.4-11.8 0-4.5-2.8-7.8-7-7.8-3.4 0-5 1.7-7 1.7s-3.6-1.7-7-1.7z" fill="#fff" />
+      <path d="M30 14.5c2.3.3 3.6 2.2 3.4 4.6" stroke="var(--color-acorn-300)" strokeWidth="2.4" strokeLinecap="round" fill="none" />
+    </svg>
+  );
+}
+
+function AcornMark({ className = "h-9 w-9" }: Props) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
       <path d="M24 4c1.5 0 2.6 1 2.6 2.4V9h-5.2V6.4C21.4 5 22.5 4 24 4z" fill="#6e461c" />
@@ -32,6 +48,11 @@ const paths: Record<IconName | "phone" | "pin" | "clock" | "mail" | "alert" | "h
   card: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 10h18M7 15h3" /></>,
   check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
   arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
+  crown: <><path d="M4 8l4 4 4-6 4 6 4-4-1.5 10h-13z" /><path d="M6.5 21h11" /></>,
+  implant: <><path d="M8 3c-1.8 0-3 1.3-3 3.2 0 2 1.4 3 2 4.8h10c.6-1.8 2-2.8 2-4.8C19 4.3 17.8 3 16 3c-1.6 0-2.4.8-4 .8S9.6 3 8 3z" /><path d="M9 11v2h6v-2M9.5 15h5M10 17h4M10.5 19h3M11 21h2" /></>,
+  veneer: <><path d="M7 3c-2.2 0-4 1.8-4 4.5 0 3 1.4 4.5 2 7 .7 3 1.2 6.5 3 6.5 1.6 0 1.8-3.5 2.5-5.5.3-.9.8-1.5 1.5-1.5s1.2.6 1.5 1.5c.7 2 .9 5.5 2.5 5.5 1.8 0 2.3-3.5 3-6.5.6-2.5 2-4 2-7C21 4.8 19.2 3 17 3c-2 0-3 1-5 1S9 3 7 3z" /><path d="M8 7c1 .6 2.5 1 4 1s3-.4 4-1" /></>,
+  child: <><circle cx="12" cy="7" r="3.5" /><path d="M5 21v-2a7 7 0 0114 0v2" /><path d="M10.5 6.8h.01M13.5 6.8h.01" /></>,
+  calm: <><path d="M3 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /><path d="M3 10c2-2 4-2 6 0s4 2 6 0 4-2 6 0" /></>,
 };
 
 export function Icon({ name, className = "h-6 w-6" }: Props & { name: keyof typeof paths }) {
